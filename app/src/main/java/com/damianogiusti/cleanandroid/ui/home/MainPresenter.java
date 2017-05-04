@@ -54,6 +54,8 @@ public class MainPresenter implements Presenter<MainView> {
     @Override
     public void destroy() {
         mainView = null;
+        // free the resources occupied by the use case
+        getProvinceListUseCase.unsubscribe();
     }
 
     private void onProvinceListReceived(List<ProvinceViewModel> provinceList) {
