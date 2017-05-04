@@ -22,6 +22,11 @@ public class ProvinceViewModel {
     }
 
     @Override
+    public int hashCode() {
+        return code.hashCode();
+    }
+
+    @Override
     public String toString() {
         return String.format("%s - %s", code, name);
     }

@@ -97,7 +97,7 @@ public class MainActivity extends BaseActivity implements MainView {
             mainListAdapter = new MainListAdapter();
             recyclerView.setAdapter(mainListAdapter);
         }
-        mainListAdapter.setProvinceViewModels(list);
+        mainListAdapter.setDataset(list);
         mainListAdapter.notifyDataSetChanged();
     }
 

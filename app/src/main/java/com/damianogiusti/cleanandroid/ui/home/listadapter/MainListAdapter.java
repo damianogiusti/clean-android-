@@ -7,10 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.damianogiusti.cleanandroid.R;
+import com.damianogiusti.cleanandroid.adapter.BaseRecyclerViewAdapter;
 import com.damianogiusti.cleanandroid.viewmodel.ProvinceViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,15 +16,10 @@ import butterknife.ButterKnife;
 /**
  * Created by Damiano Giusti on 04/05/17.
  */
-public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.MainListViewHolder> {
-
-    private List<ProvinceViewModel> provinceViewModels = new ArrayList<>();
+public class MainListAdapter extends BaseRecyclerViewAdapter<ProvinceViewModel, MainListAdapter.MainListViewHolder> {
 
     public MainListAdapter() {
-    }
 
-    public void setProvinceViewModels(List<ProvinceViewModel> provinceViewModels) {
-        this.provinceViewModels = provinceViewModels;
     }
 
     @Override
@@ -38,15 +31,15 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.MainLi
 
     @Override
     public void onBindViewHolder(MainListViewHolder viewHolder, int position) {
-        ProvinceViewModel provinceViewModel = provinceViewModels.get(position);
+        ProvinceViewModel provinceViewModel = dataset.get(position);
 
         viewHolder.titleTextView.setText(provinceViewModel.getName());
         viewHolder.subtitleTextView.setText(provinceViewModel.toString());
     }
 
     @Override
-    public int getItemCount() {
-        return provinceViewModels.size();
+    public long getItemId(int position) {
+        return dataset.get(position).hashCode();
     }
 
     static final class MainListViewHolder extends RecyclerView.ViewHolder {
