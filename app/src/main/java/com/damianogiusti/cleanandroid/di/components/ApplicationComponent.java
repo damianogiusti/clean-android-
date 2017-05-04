@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.damianogiusti.cleanandroid.BaseActivity;
 import com.damianogiusti.cleanandroid.di.modules.ApplicationModule;
+import com.damianogiusti.domain.cleanandroid.executors.MainThreadExecutor;
+import com.damianogiusti.domain.cleanandroid.executors.WorkerThreadExecutor;
 import com.google.gson.Gson;
 
 import javax.inject.Singleton;

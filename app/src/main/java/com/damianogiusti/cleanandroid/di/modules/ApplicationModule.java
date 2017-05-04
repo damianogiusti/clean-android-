@@ -2,12 +2,12 @@ package com.damianogiusti.cleanandroid.di.modules;
 
 import android.content.Context;
 
+import com.damianogiusti.cleanandroid.MainApplication;
+import com.damianogiusti.domain.cleanandroid.executors.BackgroundThread;
+import com.damianogiusti.domain.cleanandroid.executors.MainThreadExecutor;
+import com.damianogiusti.domain.cleanandroid.executors.UiThread;
+import com.damianogiusti.domain.cleanandroid.executors.WorkerThreadExecutor;
 import com.google.gson.Gson;
-import com.molo17.cloudnotes.MainApplication;
-import com.molo17.cloudnotes.domain.executors.BackgroundLooperThread;
-import com.molo17.cloudnotes.domain.executors.MainThreadExecutor;
-import com.molo17.cloudnotes.domain.executors.UiThread;
-import com.molo17.cloudnotes.domain.executors.WorkerThreadExecutor;
 
 import javax.inject.Singleton;
 
@@ -34,7 +34,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    WorkerThreadExecutor providesLooperThreadExecutor(BackgroundLooperThread backgroundLooperThread) {
+    WorkerThreadExecutor providesLooperThreadExecutor(BackgroundThread backgroundLooperThread) {
         return backgroundLooperThread;
     }
 

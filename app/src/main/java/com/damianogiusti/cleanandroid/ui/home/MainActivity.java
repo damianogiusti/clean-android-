@@ -2,15 +2,11 @@ package com.damianogiusti.cleanandroid.ui.home;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.molo17.cloudnotes.BaseActivity;
-import com.molo17.cloudnotes.R;
-import com.molo17.cloudnotes.viewmodel.ProvinceViewModel;
-
-import java.util.List;
+import com.damianogiusti.cleanandroid.BaseActivity;
+import com.damianogiusti.cleanandroid.R;
 
 import javax.inject.Inject;
 
@@ -18,7 +14,7 @@ import butterknife.BindView;
 
 public class MainActivity extends BaseActivity implements MainView {
 
-    @BindView(R.id.progressBar) ProgressBar progressBar;
+    @BindView(R.id.helloWorldTextView) TextView helloWorldTextView;
 
     @Inject MainPresenter mainPresenter;
 
@@ -62,26 +58,6 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     public void showMessage(String message) {
         Toast.makeText(context(), message, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void showProvinces(List<ProvinceViewModel> provincesList) {
-
-    }
-
-    @Override
-    public void showProgress() {
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideProgress() {
-        progressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void showError(String errorMessage) {
-        Toast.makeText(context(), errorMessage, Toast.LENGTH_LONG).show();
     }
 
     @Override

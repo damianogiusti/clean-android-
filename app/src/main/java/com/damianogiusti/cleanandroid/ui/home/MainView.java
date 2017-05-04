@@ -1,9 +1,7 @@
 package com.damianogiusti.cleanandroid.ui.home;
 
-import com.molo17.cloudnotes.mvp.View;
-import com.molo17.cloudnotes.viewmodel.ProvinceViewModel;
 
-import java.util.List;
+import com.damianogiusti.cleanandroid.mvp.View;
 
 /**
  * Created by Damiano Giusti on 03/05/17.
@@ -11,12 +9,4 @@ import java.util.List;
 public interface MainView extends View {
 
     void showMessage(String message);
-
-    void showProvinces(List<ProvinceViewModel> provincesList);
-
-    void showProgress();
-
-    void hideProgress();
-
-    void showError(String errorMessage);
 }

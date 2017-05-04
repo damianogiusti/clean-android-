@@ -7,6 +7,7 @@ import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 
 import com.damianogiusti.cleanandroid.di.components.ApplicationComponent;
+import com.damianogiusti.cleanandroid.di.components.DaggerUseCaseComponent;
 import com.damianogiusti.cleanandroid.di.components.UseCaseComponent;
 import com.damianogiusti.cleanandroid.di.modules.UseCaseModule;
 

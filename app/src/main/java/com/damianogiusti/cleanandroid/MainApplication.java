@@ -3,6 +3,7 @@ package com.damianogiusti.cleanandroid;
 import android.app.Application;
 
 import com.damianogiusti.cleanandroid.di.components.ApplicationComponent;
+import com.damianogiusti.cleanandroid.di.components.DaggerApplicationComponent;
 import com.damianogiusti.cleanandroid.di.modules.ApplicationModule;
 
 
