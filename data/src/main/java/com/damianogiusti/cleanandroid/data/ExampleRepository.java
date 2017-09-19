@@ -27,7 +27,12 @@ public class ExampleRepository extends BaseRepository {
     public Observable<List<ProvinceDataModel>> getProvinceList() {
         // first get elements from in-memory cache
         // if got error (cache miss), get from REST service and save in in-memory cache
-        return provinceMemoryCacheDataSource.getDatasetObservable()
-                .onErrorResumeNext(provinceRestDataSource.getProvinceList().doOnNext(provinceMemoryCacheDataSource::setDataset));
+        return provinceRestDataSource
+                .getProvinceList();
+//        return provinceMemoryCacheDataSource
+//                .getDatasetObservable()
+//                .onErrorResumeNext(provinceRestDataSource
+//                        .getProvinceList()
+//                        .doOnNext(provinceMemoryCacheDataSource::setDataset));
     }
 }

@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.damianogiusti.cleanandroid.R;
 import com.damianogiusti.cleanandroid.adapter.BaseRecyclerViewAdapter;
-import com.damianogiusti.cleanandroid.viewmodel.ProvinceViewModel;
+import com.damianogiusti.cleanandroid.uimodel.ProvinceUiModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Damiano Giusti on 04/05/17.
  */
-public class MainListAdapter extends BaseRecyclerViewAdapter<ProvinceViewModel, MainListAdapter.MainListViewHolder> {
+public class MainListAdapter extends BaseRecyclerViewAdapter<ProvinceUiModel, MainListAdapter.MainListViewHolder> {
 
     public MainListAdapter() {
 
@@ -31,10 +31,10 @@ public class MainListAdapter extends BaseRecyclerViewAdapter<ProvinceViewModel, 
 
     @Override
     public void onBindViewHolder(MainListViewHolder viewHolder, int position) {
-        ProvinceViewModel provinceViewModel = dataset.get(position);
+        ProvinceUiModel provinceUiModel = dataset.get(position);
 
-        viewHolder.titleTextView.setText(provinceViewModel.getName());
-        viewHolder.subtitleTextView.setText(provinceViewModel.toString());
+        viewHolder.titleTextView.setText(provinceUiModel.getName());
+        viewHolder.subtitleTextView.setText(provinceUiModel.toString());
     }
 
     @Override

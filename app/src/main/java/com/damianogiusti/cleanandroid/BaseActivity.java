@@ -7,23 +7,32 @@ import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 
 import com.damianogiusti.cleanandroid.di.components.ApplicationComponent;
-import com.damianogiusti.cleanandroid.di.components.DaggerUseCaseComponent;
-import com.damianogiusti.cleanandroid.di.components.UseCaseComponent;
-import com.damianogiusti.cleanandroid.di.modules.UseCaseModule;
+import com.damianogiusti.cleanandroid.di.components.DaggerViewModelsComponent;
+import com.damianogiusti.cleanandroid.di.components.ViewModelsComponent;
+import com.damianogiusti.cleanandroid.di.modules.ViewModelsModule;
 
 import butterknife.ButterKnife;
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Created by Damiano Giusti on 15/04/17.
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private UseCaseComponent useCaseComponent;
+    protected CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    private ViewModelsComponent viewModelsComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         onInject();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        compositeDisposable.clear();
     }
 
     /**
@@ -57,14 +66,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         return getApplicationContext().getApplicationComponent();
     }
 
-    protected UseCaseComponent getUseCaseComponent() {
-        if (useCaseComponent == null) {
-            useCaseComponent = DaggerUseCaseComponent.builder()
+    protected ViewModelsComponent getViewModelsComponent() {
+        if (viewModelsComponent == null) {
+            viewModelsComponent = DaggerViewModelsComponent.builder()
                     .applicationComponent(getApplicationComponent())
-                    .useCaseModule(new UseCaseModule())
+                    .viewModelsModule(new ViewModelsModule(this))
                     .build();
         }
-        return useCaseComponent;
+        return viewModelsComponent;
     }
 
     protected String str(@StringRes int stringResId) {

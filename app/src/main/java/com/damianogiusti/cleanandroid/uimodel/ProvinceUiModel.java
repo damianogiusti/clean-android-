@@ -1,14 +1,14 @@
-package com.damianogiusti.cleanandroid.viewmodel;
+package com.damianogiusti.cleanandroid.uimodel;
 
 /**
  * Created by Damiano Giusti on 03/05/17.
  */
-public class ProvinceViewModel {
+public class ProvinceUiModel {
 
     private String code;
     private String name;
 
-    public ProvinceViewModel(String code, String name) {
+    public ProvinceUiModel(String code, String name) {
         this.code = code;
         this.name = name;
     }
