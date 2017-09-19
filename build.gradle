@@ -13,6 +13,8 @@ buildscript {
 }
 
 ext {
+    archVersion = "1.0.0"
+
     gradleVersion = "2.3.0"
     retrolambdaVersion = "3.6.1"
     aptVersion = "1.8"
@@ -29,6 +31,7 @@ ext {
 allprojects {
     repositories {
         jcenter()
+        maven { url 'https://maven.google.com' }
     }
 }
 
