@@ -2,6 +2,7 @@ package com.damianogiusti.cleanandroid.ui.home;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +10,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.damianogiusti.cleanandroid.BaseActivity;
 import com.damianogiusti.cleanandroid.R;
+import com.damianogiusti.cleanandroid.mvp.MvpActivity;
 import com.damianogiusti.cleanandroid.ui.home.listadapter.MainListAdapter;
 import com.damianogiusti.cleanandroid.viewmodel.ProvinceViewModel;
 
@@ -20,7 +21,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity implements MainView {
+public class MainActivity extends MvpActivity implements MainView {
 
     @BindView(R.id.progressBar) ProgressBar progressBar;
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
@@ -34,13 +35,30 @@ public class MainActivity extends BaseActivity implements MainView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // bind the annotated views
-        bindViews(this);
         setupViews();
-
-        // create the presenter
-        mainPresenter.create(this, savedInstanceState);
     }
+
+    @Override
+    protected void onInject() {
+        super.onInject();
+        getMvpComponent().inject(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mainPresenter.attachView(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mainPresenter.detachView();
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Private methods
+    ///////////////////////////////////////////////////////////////////////////
 
     private void setupViews() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
@@ -48,31 +66,9 @@ public class MainActivity extends BaseActivity implements MainView {
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
     }
 
-    @Override
-    protected void onInject() {
-        super.onInject();
-        // inject the use case Dagger component
-        // will be useful when we'll add some logic to the app
-        getUseCaseComponent().inject(this);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mainPresenter.resume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mainPresenter.pause();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mainPresenter.destroy();
-    }
+    ///////////////////////////////////////////////////////////////////////////
+    // MainView
+    ///////////////////////////////////////////////////////////////////////////
 
     @Override
     public void showMessage(String message) {
@@ -109,5 +105,15 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     public Context context() {
         return this;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // PresenterProvider
+    ///////////////////////////////////////////////////////////////////////////
+
+    @NonNull
+    @Override
+    public MainPresenter getPresenter() {
+        return mainPresenter;
     }
 }
