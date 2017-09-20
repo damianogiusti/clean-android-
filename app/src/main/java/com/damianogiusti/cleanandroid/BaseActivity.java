@@ -7,9 +7,6 @@ import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 
 import com.damianogiusti.cleanandroid.di.components.ApplicationComponent;
-import com.damianogiusti.cleanandroid.di.components.DaggerUseCaseComponent;
-import com.damianogiusti.cleanandroid.di.components.UseCaseComponent;
-import com.damianogiusti.cleanandroid.di.modules.UseCaseModule;
 
 import butterknife.ButterKnife;
 
@@ -17,8 +14,6 @@ import butterknife.ButterKnife;
  * Created by Damiano Giusti on 15/04/17.
  */
 public abstract class BaseActivity extends AppCompatActivity {
-
-    private UseCaseComponent useCaseComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,20 +47,17 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     // Dagger components
+    ///////////////////////////////////////////////////////////////////////////
+    // Dagger Application Component
+    ///////////////////////////////////////////////////////////////////////////
 
     protected ApplicationComponent getApplicationComponent() {
         return getApplicationContext().getApplicationComponent();
     }
 
-    protected UseCaseComponent getUseCaseComponent() {
-        if (useCaseComponent == null) {
-            useCaseComponent = DaggerUseCaseComponent.builder()
-                    .applicationComponent(getApplicationComponent())
-                    .useCaseModule(new UseCaseModule())
-                    .build();
-        }
-        return useCaseComponent;
-    }
+    ///////////////////////////////////////////////////////////////////////////
+    // Utility methods
+    ///////////////////////////////////////////////////////////////////////////
 
     protected String str(@StringRes int stringResId) {
         return getString(stringResId);
