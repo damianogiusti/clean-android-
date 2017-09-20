@@ -3,6 +3,7 @@ package com.damianogiusti.cleanandroid;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 
@@ -21,6 +22,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         onInject();
     }
 
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        super.setContentView(layoutResID);
+
+        // Bind views with ButterKnife when the layout has been inflated.
+        ButterKnife.bind(this);
+    }
+
     /**
      * Convenience method for injecting Dagger components in the right time during the activity
      * lifecycle.
@@ -35,18 +44,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         return (MainApplication) super.getApplicationContext();
     }
 
-    /**
-     * Convenience method for binding the annotated views of the given activity.
-     * Override it if you want some custom bindings.
-     *
-     * @param activity Must extend from {@link BaseActivity}
-     */
-    @CallSuper
-    protected <T extends BaseActivity> void bindViews(T activity) {
-        ButterKnife.bind(activity);
-    }
-
-    // Dagger components
     ///////////////////////////////////////////////////////////////////////////
     // Dagger Application Component
     ///////////////////////////////////////////////////////////////////////////
