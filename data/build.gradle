@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 buildscript {
     repositories {
@@ -56,7 +58,7 @@ dependencies {
     // ---
 
     compile "com.google.dagger:dagger:$daggerVersion"
-    apt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
 
     compile "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     compile "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
@@ -64,4 +66,8 @@ dependencies {
     compile "com.squareup.okhttp3:okhttp:$okHttpVersion"
 
     compile "com.google.code.gson:gson:$gsonVersion"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
