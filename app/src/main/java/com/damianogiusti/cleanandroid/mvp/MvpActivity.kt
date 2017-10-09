@@ -34,7 +34,7 @@ abstract class MvpActivity : BaseActivity(), PresenterProvider {
     }
 
     override fun getRetainedPresenter(): Presenter<*>? =
-            lastNonConfigurationInstance as? Presenter<*>
+            lastCustomNonConfigurationInstance as? Presenter<*>
 
     override fun onRetainCustomNonConfigurationInstance(): Any = getPresenter()
 }

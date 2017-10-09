@@ -15,10 +15,7 @@ class MvpModule(private val presenterProvider: PresenterProvider) {
 
     @Provides
     internal fun providesMainPresenter(getProvinceListUseCase: GetProvinceListUseCase): MainPresenter {
-        var presenter = presenterProvider.getRetainedPresenter() as MainPresenter?
-        if (presenter == null) {
-            presenter = MainPresenter(getProvinceListUseCase)
-        }
-        return presenter
+        return presenterProvider.getRetainedPresenter() as? MainPresenter
+                ?: MainPresenter(getProvinceListUseCase)
     }
 }
